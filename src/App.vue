@@ -1,32 +1,50 @@
 <template>
   <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </nav>
-    <router-view/>
+    <h1>根组件 {{ title }} - {{ count }}</h1>
+    <input :value="count" @input="NewCount" type="text">
+    <Son1></Son1>
+    <hr>
+    <Son2></Son2>
   </div>
 </template>
 
-<style lang="less">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import Son1 from './components/Son1'
+import Son2 from './components/Son2'
+import { mapState } from 'vuex'
 
-nav {
-  padding: 30px;
+export default {
+  name: 'app',
+  data: function () {
+    return {
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
     }
+  },
+  created () {
+
+  },
+  methods: {
+    NewCount (e) {
+      const nbr = +e.target.value
+      this.$store.commit('changenbr', nbr)
+    }
+  },
+  computed: {
+    ...mapState(['count', 'title'])
+  },
+  components: {
+    Son1,
+    Son2
   }
+}
+</script>
+
+<style>
+#app {
+  width: 600px;
+  margin: 20px auto;
+  border: 3px solid #ccc;
+  border-radius: 3px;
+  padding: 10px;
 }
 </style>
