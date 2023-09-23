@@ -1,50 +1,40 @@
 <template>
-  <div id="app">
-    <h1>根组件 {{ title }} - {{ count }}</h1>
-    <input :value="count" @input="NewCount" type="text">
-    <Son1></Son1>
-    <hr>
-    <Son2></Son2>
+  <div class="app-container">
+    <!-- Header 区域 -->
+    <cart-header></cart-header>
+
+    <!-- 商品 Item 项组件 -->
+    <cart-item v-for="(item) in list" :key="item.id" :item="item"></cart-item>
+    <!-- Foote 区域 -->
+    <cart-footer></cart-footer>
   </div>
 </template>
 
 <script>
-import Son1 from './components/Son1'
-import Son2 from './components/Son2'
+import CartHeader from '@/components/cart-header.vue'
+import CartFooter from '@/components/cart-footer.vue'
+import CartItem from '@/components/cart-item.vue'
 import { mapState } from 'vuex'
 
 export default {
-  name: 'app',
-  data: function () {
-    return {
-
-    }
-  },
+  name: 'App',
   created () {
-
-  },
-  methods: {
-    NewCount (e) {
-      const nbr = +e.target.value
-      this.$store.commit('changenbr', nbr)
-    }
+    this.$store.dispatch('cart/GetNewList')
   },
   computed: {
-    ...mapState(['count', 'title'])
+    ...mapState('cart', ['list'])
   },
   components: {
-    Son1,
-    Son2
+    CartHeader,
+    CartFooter,
+    CartItem
   }
 }
 </script>
 
-<style>
-#app {
-  width: 600px;
-  margin: 20px auto;
-  border: 3px solid #ccc;
-  border-radius: 3px;
-  padding: 10px;
+<style lang="less" scoped>
+.app-container {
+  padding: 50px 0;
+  font-size: 14px;
 }
 </style>
