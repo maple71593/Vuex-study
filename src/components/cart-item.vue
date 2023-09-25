@@ -27,9 +27,11 @@ export default {
   name: 'CartItem',
   methods: {
     add (n) {
+      if (n === -1 && this.item.count < 1) { return }
       const Newcount = this.item.count + n
       const ID = this.item.id
       this.$store.dispatch('cart/DataUpNewList', { Newcount, ID })
+      console.log(Newcount)
     }
   },
   props: ['item']

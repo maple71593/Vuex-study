@@ -2,6 +2,7 @@
   <div class="footer-container">
     <!-- 中间的合计 -->
     <div>
+      <button>歸零</button>
       <span>共 {{ total }} 件商品，合计：</span>
       <span class="price">￥{{ totalprice }}</span>
     </div>
@@ -14,9 +15,15 @@
 import { mapGetters } from 'vuex'
 export default {
   name: 'CartFooter',
+  created () {
+  },
   computed: {
-    ...mapGetters('cart', ['total', 'totalprice'])
+    ...mapGetters('cart', ['total', 'totalprice', 'getID'])
+  },
+  methods: {
+
   }
+
 }
 </script>
 

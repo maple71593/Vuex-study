@@ -12,6 +12,9 @@ export default {
     },
     totalprice (state) {
       return state.list.reduce((sum, item) => sum + item.count * item.price, 0)
+    },
+    getID (state) {
+      return state.list
     }
   },
   mutations: {
